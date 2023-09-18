@@ -1,11 +1,23 @@
+INSTALLATION OF LIFTOVER 
+conda install -c bioconda ucsc-liftover
+
 conda activate ucsc
 
-
-liftOver 26August2017_EJCsamples_allReads_250bp.bed hg19ToHg38.over.chain atac_file_38_250.bed unmapped_19_to_38_250
-
-
+LOCATION OF THE CHAIN FILE FOR LIFTOVER 
 hg19ToHg38.over.chain from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/liftOver/
 
-file to be converted: 26August2017_EJCsamples_allReads_250bp.bed
+TO DOWNLOAD 
+wget http://hgdownload.soe.ucsc.edu/goldenPath/hg19/liftOver/hg19ToHg38.over.chain.gz
 
+TO UNZIP FILE
+gzip -d hg19ToHg38.over.chain.gz
+
+TO CONVERT TEXT FILE TO BED FILE 
+mv 26August2017_EJCsamples_allReads_250bp.bed.txt 26August2017_EJCsamples_allReads_250bp.bed
+
+USE OF LIFTOVER 
+liftOver 26August2017_EJCsamples_allReads_250bp.bed hg19ToHg38.over.chain atac_file_38_250.bed unmapped_19_to_38_250
+
+file to be converted: 26August2017_EJCsamples_allReads_250bp.bed
+umapped regions: unmapped_19_to_38_250
 output file: atac_file_38_250.bed
