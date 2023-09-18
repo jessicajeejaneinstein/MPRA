@@ -1,0 +1,11 @@
+conda activate ucsc
+
+
+liftOver 26August2017_EJCsamples_allReads_250bp.bed hg19ToHg38.over.chain atac_file_38_250.bed unmapped_19_to_38_250
+
+
+hg19ToHg38.over.chain from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/liftOver/
+
+file to be converted: 26August2017_EJCsamples_allReads_250bp.bed
+
+output file: atac_file_38_250.bed
