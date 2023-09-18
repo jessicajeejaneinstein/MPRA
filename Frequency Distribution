@@ -1,0 +1,39 @@
+library(readxl)
+library(ggplot2)
+library(dplyr)
+library(openxlsx) # Load the openxlsx library for Excel output
+
+# Read the data
+data <- read_excel("C:/Users/jessi/Desktop/BI/MPRA/frequency distribution/trt_freq_distribution.xlsx", range = "A1:B3843")
+
+# Create a histogram and plot it
+histogram <- ggplot(data, aes(x = Prob)) +
+  geom_histogram(binwidth = 0.01, fill = "blue", color = "black") +
+  labs(title = "Frequency Distribution of Prob",
+       x = "Probability",
+       y = "Frequency") +
+  theme_minimal() +
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 3000)) # Set x-axis and y-axis limits
+
+# Filter the data
+filtered_data <- data %>%
+  filter(Prob > 0.025) %>%
+  as.data.frame()
+
+# Write the filtered data to a CSV file
+write.csv(filtered_data, "C:/Users/jessi/Desktop/BI/MPRA/filtered_data.csv")
+
+# Calculate the frequency distribution
+freq_table <- table(cut(data$Prob, breaks = seq(0, 1, by = 0.01), right = FALSE))
+
+# Create a data frame from the frequency table
+freq_data <- as.data.frame(freq_table)
+
+# Rename the columns
+colnames(freq_data) <- c("Range", "Frequency")
+
+# Write the frequency distribution to an Excel file
+write.xlsx(freq_data, "C:/Users/jessi/Desktop/BI/MPRA/frequency distribution/frequency_distribution.xlsx")
+
+# Display the histogram
+print(histogram)
