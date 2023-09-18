@@ -1,4 +1,6 @@
 INSTALLATION OF LIFTOVER 
+conda create -n ucsc
+
 conda install -c bioconda ucsc-liftover
 
 conda activate ucsc
