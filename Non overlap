@@ -1,0 +1,20 @@
+library(dplyr)
+
+# Read data from the first CSV file
+PP_3842_0.1 <- "C:/Users/jessi/Desktop/BI/MPRA/summary stats/PP_3842_0.1.csv"
+data1 <- read.csv(PP_3842_0.1)
+
+# Read data from the second CSV file
+ATCT_500_3842_PP_0.1 <- "C:/Users/jessi/Desktop/BI/MPRA/summary stats/ATCT_500_3842_PP_0.1.csv"
+data2 <- read.csv(ATCT_500_3842_PP_0.1)
+
+# Extract the 'start' column from data2
+x <- as.integer(data2$start)
+
+# Find non-overlapping rows based on the 'start' column
+non_overlap_0.1 <- data1%>%
+  filter(!start %in% x) %>%
+  as.data.frame()
+
+
+write.xlsx(non_overlap_0.1, "C:/Users/jessi/Desktop/BI/MPRA/summary stats/non_overlap_0.1.xlsx")
