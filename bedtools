@@ -4,3 +4,27 @@ $ wget https://github.com/arq5x/bedtools2/releases/download/v2.29.1/bedtools-2.2
 $ tar -zxvf bedtools-2.29.1.tar.gz
 $ cd bedtools2
 $ make
+
+
+#bed file conversion from TSV to bed
+
+awk 'BEGIN{OFS="\t"} NR>1 {print "chr"$2, $3, $3+1, $5, $4, $9, $12}' GCST90165267_buildGRCh38.tsv > GWAS_summary_stats_inclusive_6.bed
+
+    NR>1 removes the header from the TSV file 
+
+
+#bed file conversion from txt to bed 
+
+awk 'BEGIN{OFS="\t"} {print $1, $2, $3, $4, $5, $6}' 3842_edited.bed.txt > 3842_gwas.bed
+
+
+#running bed tools intersect this give the actc location in file A and the locations in B file  
+
+bedtools intersect  -a reads.bed -b genes.bed -v
+
+
+#main
+bedtools intersect -a atac_file_38_500.bed -b GWAS_summary_stats_inclusive_6.bed -wa -wb > atac_file_38_500_intersect_gwas_summary_stats.bed
+ 
+ 
+bedtools intersect -a atac500_3842_overlap.bed -b atac500_summ_stats_overlap.bed -wa -wb > atac500_3842_summ_stats_negativecontrol.bed
