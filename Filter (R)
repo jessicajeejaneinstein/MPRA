@@ -1,0 +1,14 @@
+library(readxl)
+library(data.table)
+library(tidyverse)
+library(readr)
+library(tidyr)
+
+data <- read_excel("C:/Users/jessi/Desktop/BI/MPRA/summary stats/3842_edited.xlsx")
+
+
+PP_3842_0.1 <- data %>%
+  filter(`PIP_value` > 0.1) %>%
+  as.data.frame()
+
+write.csv(PP_3842_0.1, "C:/Users/jessi/Desktop/BI/MPRA/summary stats/PP_3842_0.1.csv")
